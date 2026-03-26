@@ -1,0 +1,66 @@
+<div mat-dialog-content>
+  <h2 mat-dialog-title>Procesar Pago</h2>
+  
+  <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
+
+    @if (mostrarSelectorReserva) {
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Seleccionar Reserva Abierta</mat-label>
+        <mat-select formControlName="idReserva">
+          @for (reserva of reservasActivas; track reserva.id) {
+            <mat-option [value]="reserva.id">
+              Reserva {{ reserva.id }} del Vehiculo: {{ reserva.vehiculo?.placa || reserva.vehiculo?.id }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (pagoForm.get('idReserva')?.invalid && pagoForm.get('idReserva')?.touched) {
+          <mat-error>
+            Debe seleccionar una reserva abierta
+          </mat-error>
+        }
+        <mat-hint>Seleccione una reserva abierta para procesar el pago</mat-hint>
+      </mat-form-field>
+    } @else {
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID Reserva Seleccionada</mat-label>
+        <input matInput [value]="pagoForm.get('idReserva')?.value || data.idReserva" disabled>
+        <mat-hint>Reserva seleccionada para pago</mat-hint>
+      </mat-form-field>
+    }
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>ID Metodo de Pago</mat-label>
+      <input matInput type="number" formControlName="idMetodoPago" placeholder="Ingrese el ID del metodo de pago">
+      @if (pagoForm.get('idMetodoPago')?.invalid && pagoForm.get('idMetodoPago')?.touched) {
+        <mat-error>
+          Debe ingresar un ID de metodo de pago valido
+        </mat-error>
+      }
+      <mat-hint>Ingrese el ID del metodo de pago</mat-hint>
+    </mat-form-field>
+
+    <div class="info-section">
+      <mat-icon color="primary">info</mat-icon>
+      <span>El monto se calculara automaticamente segun la tarifa definida por el parqueadero</span>
+    </div>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+        Cancelar
+      </button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit"
+        [disabled]="pagoForm.invalid || loading">
+        @if (loading) {
+          <mat-spinner diameter="16"></mat-spinner>
+          Procesando...
+        } @else {
+          Procesar Pago
+        }
+      </button>
+    </div>
+
+  </form>
+</div>

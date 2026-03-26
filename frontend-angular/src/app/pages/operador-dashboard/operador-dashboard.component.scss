@@ -1,0 +1,176 @@
+.dashboard-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.quick-actions {
+  
+  margin-bottom: 30px;
+}
+
+.quick-actions h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.action-btn {
+  background: white;
+  border: 2px solid #e1e8ed;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.action-btn:hover {
+  border-color: #3498db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+}
+
+.action-btn i {
+  font-size: 2em;
+  color: #3498db;
+}
+
+.action-btn span {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.operational-stats {
+  margin-bottom: 30px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+
+.historial-reservas {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.no-activity {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  padding: 30px 0;
+  margin: 0;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.empresa-info {
+  font-size: 1.25rem;
+  color: #6b7280;
+}
+
+.empresa-label {
+  font-weight: 500;
+}
+
+.empresa-nombre {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.estadisticas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.estadistica-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.estadistica-icono {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.estadistica-icono.parqueaderos {
+  color: #3f8600;
+}
+
+.estadistica-icono.ocupadas {
+  color: #cf1322;
+}
+
+.estadistica-icono.disponibles {
+  color: #52c41a;
+}
+
+.estadistica-icono.reservas {
+  color: #1890ff;
+}
+
+.estadistica-valor {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 8px 0 4px 0;
+}
+
+.estadistica-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.estadisticas-adicionales {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.estadistica-adicional-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.loading-contentainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.loading-contentainer p {
+  margin-top: 16px;
+  color: #6b7280;
+}
+

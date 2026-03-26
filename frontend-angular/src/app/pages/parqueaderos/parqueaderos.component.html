@@ -1,0 +1,68 @@
+<div class="parqueaderos-container">
+  <mat-card>
+
+    
+    <mat-card-header>
+      <mat-card-title>
+        @if(usuarioIsAdmin) {
+          <div class="header-content">
+            <button mat-raised-button color="primary" (click)="abrirModalCrear()">
+              <mat-icon>add</mat-icon>
+              Nuevo Parqueadero
+            </button>
+          </div>
+        }
+      </mat-card-title>
+    </mat-card-header>
+
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-container">
+          <mat-spinner></mat-spinner>
+          <p>Cargando parqueaderos...</p>
+        </div>
+      } @else {
+        @if (parqueaderos.length === 0) {
+          <div class="no-data">
+            <mat-icon>info</mat-icon>
+            <p>No hay parqueaderos registrados para su empresa</p>
+            <button mat-raised-button color="primary" (click)="abrirModalCrear()">
+              Crear primer parqueadero
+            </button>
+          </div>
+        } @else {
+          <div class="table-container">
+            <table mat-table [dataSource]="parqueaderos" class="mat-elevation-2">
+
+
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let parqueadero">{{ parqueadero.id }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let parqueadero">{{ parqueadero.nombre }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="ubicacion">
+                <th mat-header-cell *matHeaderCellDef>Ubicacion</th>
+                <td mat-cell *matCellDef="let parqueadero">{{ parqueadero.ubicacion }}</td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="capacidadTotal">
+                <th mat-header-cell *matHeaderCellDef>Capacidad</th>
+                <td mat-cell *matCellDef="let parqueadero">{{ parqueadero.capacidadTotal }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        }
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

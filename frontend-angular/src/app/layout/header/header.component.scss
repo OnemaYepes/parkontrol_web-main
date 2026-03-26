@@ -1,0 +1,81 @@
+.header {
+  background: white;
+  padding: 20px 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-pagina h1 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.info-usuario {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.datos-usuario {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.nombre-usuario {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.rol-usuario {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+.boton-logout {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.boton-logout:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.boton-logout:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+  
+  .titulo-pagina h1 {
+    font-size: 1.5em;
+  }
+  
+  .info-usuario {
+    gap: 15px;
+  }
+  
+  .boton-logout {
+    padding: 6px 12px;
+    font-size: 0.8em;
+  }
+}

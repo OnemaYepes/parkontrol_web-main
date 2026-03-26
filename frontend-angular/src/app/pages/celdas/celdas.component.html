@@ -1,0 +1,108 @@
+<div class="celdas-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        @if(usuarioIsAdmin) {
+          <div class="header-content">
+            <button mat-raised-button color="primary" (click)="abrirModalCrear()" [disabled]="parqueaderos.length === 0">
+              <mat-icon>add</mat-icon>
+              Nueva Celda
+            </button>
+          </div>
+        }
+        
+
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-container">
+          <mat-spinner></mat-spinner>
+          <p>Cargando celdas...</p>
+        </div>
+      } @else {
+        @if (parqueaderos.length === 0) {
+          <div class="no-data">
+            <mat-icon>info</mat-icon>
+            <p>No hay parqueaderos registrados para su empresa</p>
+          </div>
+      } @else {
+          <app-filtro-parqueaderos
+            [parqueaderos]="parqueaderos"
+            [parqueaderoSeleccionado]="parqueaderoSeleccionado"
+            (parqueaderoCambia)="onParqueaderoCambia($event)">
+          </app-filtro-parqueaderos>
+
+          @if (errorMessage) {
+            <div class="mensaje-error">
+              <mat-icon color="warn">error</mat-icon>
+              <span>{{ errorMessage }}</span>
+            </div>
+          }
+
+          @if (celdasFiltradas.length === 0 && parqueaderoSeleccionado) {
+            <div class="no-data">
+              <mat-icon>info</mat-icon>
+              <p>No hay celdas registradas para este parqueadero</p>
+            </div>
+
+          } @else if (parqueaderoSeleccionado) {
+
+            <div class="table-container">
+              <table mat-table [dataSource]="celdasFiltradas" class="celdas-table">         
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let celda">{{ celda.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef>Estado</th>
+                  <td mat-cell *matCellDef="let celda">
+                    <mat-chip selected>
+                      {{ celda.estado }}
+                    </mat-chip>
+                  </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="tipoCelda">
+                  <th mat-header-cell *matHeaderCellDef>Tipo Celda</th>
+                  <td mat-cell *matCellDef="let celda">{{ celda.tipoCelda.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="sensor">
+                  <th mat-header-cell *matHeaderCellDef>Sensor</th>
+                  <td mat-cell *matCellDef="let celda">{{ celda.sensor.id }}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                  <td mat-cell *matCellDef="let celda">
+                    <mat-form-field appearance="outline" class="estado-select">
+                      
+                      <mat-select 
+                        [value]="celda.estado" 
+                        (selectionChange)="cambiarEstado(celda, $event.value)">
+                        @for (estado of estadosCeldas; track estado.valor)
+                        {
+                          <mat-option [value]="estado.valor">
+                            {{ estado.nombre }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+          }
+        }
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,17 @@
+<div class="filtro-container">
+  <mat-form-field appearance="outline" class="filtro-parqueadero">
+    <mat-label>Seleccionar parqueadero</mat-label>
+    <mat-select 
+      [value]="parqueaderoSeleccionado" 
+      (selectionChange)="onParqueaderoCambia($event.value)"
+      placeholder="Seleccionar parqueadero">
+      
+      @for (parqueadero of parqueaderos; track parqueadero.id) {
+        <mat-option [value]="parqueadero.id">
+          {{ parqueadero.nombre }}
+        </mat-option>
+      }
+      
+    </mat-select>
+  </mat-form-field>
+</div>

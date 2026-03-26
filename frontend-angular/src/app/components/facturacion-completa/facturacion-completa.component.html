@@ -1,0 +1,70 @@
+<div class="facturacion-container">
+  @if (loading) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando facturacion...</p>
+    </div>
+  } @else {
+    @if (facturacionData.length > 0) {
+      <div class="table-container">
+        <table mat-table [dataSource]="facturacionData" class="facturacion-table mat-elevation-z1">
+            
+
+        <ng-container matColumnDef="cufe">
+          <th mat-header-cell *matHeaderCellDef>CUFE</th>
+          <td mat-cell *matCellDef="let facturaData">{{ facturaData.cufe }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="numeroDocumento">
+          <th mat-header-cell *matHeaderCellDef>Documento</th>
+          <td mat-cell *matCellDef="let facturaData">{{ facturaData.numeroDocumento }}</td>
+        </ng-container>
+
+    
+        <ng-container matColumnDef="correoCliente">
+          <th mat-header-cell *matHeaderCellDef>Placa</th>
+          <td mat-cell *matCellDef="let facturaData">{{ facturaData.correo  }}</td>
+        </ng-container>
+
+     
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef>Monto</th>
+          <td mat-cell *matCellDef="let facturaData">
+            <span class="monto">{{ facturaData.monto | currency: 'COP':'symbol':'1.2-2' }}</span>
+          </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="fechaPago">
+          <th mat-header-cell *matHeaderCellDef>Fecha Pago</th>
+          <td mat-cell *matCellDef="let facturaData">{{ facturaData.fechaPago | date: 'dd/MM/yyyy HH:mm' }}</td>
+        </ng-container>
+
+  
+        <ng-container matColumnDef="enviada">
+            
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let facturaData">
+            <div class="estado-container">
+              <mat-icon [class]="facturaData.enviada ? 'estado-enviada' : 'estado-pendiente'">
+                {{ facturaData.enviada ? 'check_circle' : 'pending' }}
+              </mat-icon>
+              <span [class]="facturaData.enviada ? 'texto-enviada' : 'texto-pendiente'">
+                {{ facturaData.enviada ? 'Enviada' : 'Pendiente' }}
+              </span>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    } @else {
+      <div class="sin-datos">
+        <p>No se encontraron datos de facturacion para mostrar.</p>
+      </div>
+    }
+  }
+</div>

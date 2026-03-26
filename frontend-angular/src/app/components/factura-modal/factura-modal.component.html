@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Crear Factura Electronica</h2>
+<mat-dialog-content>
+	<form [formGroup]="facturaForm" (ngSubmit)="onSubmit()">
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>ID Pago</mat-label>
+			<input matInput type="number" formControlName="idPago" placeholder="Ingrese ID de pago">
+			@if (facturaForm.get('idPago')?.invalid && facturaForm.get('idPago')?.touched) {
+				<mat-error>
+
+					@if (facturaForm.get('idPago')?.errors?.['required']) {
+						El ID de pago es requerido
+					} @else if (facturaForm.get('idPago')?.errors?.['pattern']) {
+                        
+						El ID de pago debe ser numerico
+					}
+				</mat-error>
+
+			}
+	
+        </mat-form-field>
+
+
+
+		<mat-form-field appearance="outline" class="full-width">
+
+			<mat-label>Cliente Facturación</mat-label>
+			<mat-select formControlName="idClienteFactura">
+				@if (data.clientes?.length === 0) {
+					<mat-option disabled>No hay clientes</mat-option>
+				} @else {
+				 @for (cliente of data.clientes; track cliente.id) {
+						<mat-option [value]="cliente.id">{{ cliente.numeroDocumento }} - {{ cliente.correo }}</mat-option>
+					}
+
+				}
+
+			</mat-select>
+			@if (facturaForm.get('idClienteFactura')?.invalid && facturaForm.get('idClienteFactura')?.touched) {
+				<mat-error>Debe seleccionar un cliente</mat-error>
+			}
+		
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>CUFE</mat-label>
+			<input matInput formControlName="cufe" placeholder="Código Único de Facturación Electrónica">
+			@if (facturaForm.get('cufe')?.invalid && facturaForm.get('cufe')?.touched) {
+				<mat-error>Debe ingresar un CUFE</mat-error>
+			}
+		</mat-form-field>
+
+		<div mat-dialog-actions class="dialog-actions">
+			<button mat-button type="button" (click)="cancelar()">Cancelar</button>
+			<button mat-raised-button color="primary" type="submit" [disabled]="facturaForm.invalid">Aceptar</button>
+		</div>
+	</form>
+</mat-dialog-content>
+

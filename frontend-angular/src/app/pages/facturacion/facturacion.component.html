@@ -1,0 +1,33 @@
+
+<div class="vistas-container">
+  <div class="header">
+    @if (errorMessage) {
+    <div class="mensaje-error">
+      <mat-icon color="warn">error</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  @if (mensajeExito) {
+    <div class="mensaje-exito">
+      <mat-icon color="primary">check_circle</mat-icon>
+      <span>{{ mensajeExito }}</span>
+    </div>
+  }
+
+  </div>
+  
+
+  <mat-tab-group class="vistas-tabs">
+    <mat-tab label="Clientes">
+      <div class="tab-content">
+        <app-clientes-factura [clientes]="clientesFactura" (clienteCreado)="onClienteCreado($event)"></app-clientes-factura>
+      </div>
+    </mat-tab>
+    <mat-tab label="Facturas">
+      <div class="tab-content">
+          <app-facturas-lista [facturas]="facturas" [idEmpresa]="idEmpresa" [clientes]="clientesFactura" (crearFactura)="onCrearFactura($event)"></app-facturas-lista>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

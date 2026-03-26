@@ -1,0 +1,43 @@
+
+.usuarios-container {
+  padding: 24px;
+}
+mat-card {
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.header-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.filtro-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.tabla-row {
+  margin-top: 16px;
+}
+.mensaje-exito {
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.mensaje-error {
+  color: #f44336;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.no-data {
+  text-align: center;
+  color: #888;
+  margin-top: 16px;
+}

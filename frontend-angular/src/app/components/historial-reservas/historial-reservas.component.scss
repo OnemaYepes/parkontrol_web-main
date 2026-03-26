@@ -1,0 +1,49 @@
+.historial-container {
+  width: 100%;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: #6b7280;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 48px;
+  color: #6b7280;
+}
+
+.historial-table {
+  width: 100%;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.en-curso {
+  color: #2196F3;
+  font-style: italic;
+}
+
+.estado-activa {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.estado-completada {
+  color: #757575;
+}
+
+.estado-cancelada {
+  color: #f44336;
+}

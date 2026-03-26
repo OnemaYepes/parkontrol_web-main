@@ -1,0 +1,61 @@
+
+<h2 mat-dialog-title>Crear Cliente</h2>
+<mat-dialog-content>
+
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tipo de Documento</mat-label>
+      <input matInput formControlName="tipoDocumento" placeholder="CC, NIT, CE, etc." required>
+      @if (formGroup.get('tipoDocumento')?.hasError('required') && formGroup.get('tipoDocumento')?.touched) {
+        <mat-error>Este campo es obligatorio</mat-error>
+      }
+      <mat-hint>Ingrese el tipo de documento</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Número de Documento</mat-label>
+      <input matInput formControlName="numeroDocumento" placeholder="1234567890" required>
+      @if (formGroup.get('numeroDocumento')?.hasError('required') && formGroup.get('numeroDocumento')?.touched) {
+        <mat-error>Este campo es obligatorio</mat-error>
+      }
+      <mat-hint>Ingrese el número de documento</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="correo" placeholder="cliente@ejemplo.com" required>
+      @if (formGroup.get('correo')?.hasError('required') && formGroup.get('correo')?.touched) {
+        <mat-error>Este campo es obligatorio</mat-error>
+      }
+      @if (formGroup.get('correo')?.hasError('email') && formGroup.get('correo')?.touched) {
+        <mat-error>Correo inválido</mat-error>
+      }
+      <mat-hint>Ingrese el correo electrónico del cliente</mat-hint>
+    </mat-form-field>
+
+    <div class="info-section">
+      <mat-icon color="primary">info</mat-icon>
+      <span>Los datos del cliente seran usados para la facturación electrónica.</span>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button type="button" (click)="cancelar()" [disabled]="loading">
+    Cancelar
+  </button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    type="submit"
+    [disabled]="formGroup.invalid || loading"
+    (click)="onSubmit()">
+    @if (loading) {
+      <mat-spinner diameter="16"></mat-spinner>
+      Procesando...
+    } @else {
+      Aceptar
+    }
+  </button>
+</mat-dialog-actions>

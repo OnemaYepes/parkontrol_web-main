@@ -1,0 +1,134 @@
+<div class="contenedor-registro">
+  <mat-card class="tarjeta-registro">
+
+
+    <mat-card-header>
+      <div mat-card-avatar class="avatar-registro">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </div>
+
+      <mat-card-title>Parkontrol</mat-card-title>
+      <mat-card-subtitle>Registro de Administrador</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="formulario-registro">
+        
+        @if (errorMessage) {
+          <div class="mensaje-error">
+            <mat-icon color="warn">error</mat-icon>
+            <span>{{ errorMessage }}</span>
+          </div>
+        }
+
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>Nombre completo</mat-label>
+          <input matInput 
+                 formControlName="nombre"
+                 placeholder="Tu nombre completo">
+          <mat-icon matSuffix>person</mat-icon>
+
+          @if (registerForm.get('nombre')?.hasError('required')) {
+            <mat-error>El nombre es requerido</mat-error>
+          }
+          @if (registerForm.get('nombre')?.hasError('minlength')) {
+            <mat-error>El nombre debe tener al menos 3 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>Correo electronico</mat-label>
+          <input matInput 
+                 type="email" 
+                 formControlName="correo"
+                 placeholder="ejemplo@correo.com">
+          <mat-icon matSuffix>email</mat-icon>
+
+          @if (registerForm.get('correo')?.hasError('required')) {
+            <mat-error>El correo es requerido</mat-error>
+          }
+          @if (registerForm.get('correo')?.hasError('email')) {
+            <mat-error>Ingresa un correo valido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>Contraseña</mat-label>
+          <input matInput 
+                 [type]="hidePassword ? 'password' : 'text'"
+                 formControlName="contrasena">
+          <button mat-icon-button 
+                  matSuffix 
+                  type="button"
+                  (click)="hidePassword = !hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          @if (registerForm.get('contrasena')?.hasError('required')) {
+            <mat-error>La contraseña es requerida</mat-error>
+          }
+          @if (registerForm.get('contrasena')?.hasError('minlength')) {
+            <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>ID de Empresa que Administrara</mat-label>
+          <input matInput 
+                 type="number"
+                 formControlName="idEmpresa"
+                 placeholder="Ejemplo: 1">
+          <mat-icon matSuffix>business</mat-icon>
+          <mat-hint>Ingresa el ID de la empresa que vas a administrar</mat-hint>
+          @if (registerForm.get('idEmpresa')?.hasError('required')) {
+            <mat-error>El ID de empresa es requerido</mat-error>
+          }
+          @if (registerForm.get('idEmpresa')?.hasError('min')) {
+            <mat-error>El ID de empresa debe ser mayor a 0</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="info-registro">
+
+          <mat-card class="tarjeta-info">
+            <mat-card-content>
+              <div class="rol-info">
+                <mat-icon color="primary">admin_panel_settings</mat-icon>
+                <div>
+                  <strong>Administrador</strong>
+                  <p>Gestion completa de tu empresa y sus parqueaderos</p>
+                </div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+        <div class="acciones">
+          <button mat-raised-button 
+                  color="primary" 
+                  type="submit"
+                  class="boton-completo"
+                  [disabled]="registerForm.invalid || loading">
+
+            @if (loading) {
+              <mat-spinner diameter="20"></mat-spinner>
+            }
+
+
+            @if (!loading) {
+              <span>Registrarme como Administrador</span>
+            }
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="acciones-tarjeta">
+      <p>Ya tienes cuenta? 
+        <a routerLink="/login" class="enlace">Iniciar sesion aqui</a>
+      </p>
+    </mat-card-actions>
+  </mat-card>
+</div>

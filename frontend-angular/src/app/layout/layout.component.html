@@ -1,0 +1,17 @@
+<div class="layout-container">
+
+  <app-sidebar [elementosMenu]="elementosMenuFiltrados"></app-sidebar>
+
+
+  <main class="main-content">
+    <app-header
+      [tituloPagina]="obtenerTituloPagina()"
+      [usuarioActual]="usuarioActual"
+      (onCerrarSesion)="Onlogout()">
+    </app-header>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

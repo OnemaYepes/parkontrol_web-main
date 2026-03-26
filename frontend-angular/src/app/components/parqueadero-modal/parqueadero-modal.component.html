@@ -1,0 +1,54 @@
+<div mat-dialog-content>
+  <h2 mat-dialog-title> Nuevo parqueadero </h2>
+  
+  <form [formGroup]="parqueaderoForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingrese el nombre del parqueadero">
+
+      @if (parqueaderoForm.get('nombre')?.hasError('required') && parqueaderoForm.get('nombre')?.touched) {
+        <mat-error>El nombre es requerido</mat-error>
+      }
+      @if (parqueaderoForm.get('nombre')?.hasError('minlength') && parqueaderoForm.get('nombre')?.touched) {
+        <mat-error>El nombre debe tener al menos 3 caracteres</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ubicación</mat-label>
+      <input matInput formControlName="ubicacion" placeholder="Ingrese la ubicación">
+
+      @if (parqueaderoForm.get('ubicacion')?.hasError('required') && parqueaderoForm.get('ubicacion')?.touched) {
+        <mat-error>La ubicación es requerida</mat-error>
+      }
+      @if (parqueaderoForm.get('ubicacion')?.hasError('minlength') && parqueaderoForm.get('ubicacion')?.touched) {
+        <mat-error>La ubicacion debe tener al menos 3 caracteres</mat-error>
+      }
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Capacidad Total</mat-label>
+      <input matInput type="number" formControlName="capacidadTotal" placeholder="Ingrese la capacidad total">
+      @if (parqueaderoForm.get('capacidadTotal')?.hasError('required') && parqueaderoForm.get('capacidadTotal')?.touched) {
+        <mat-error>La capacidad es requerida</mat-error>
+      }
+      @if (parqueaderoForm.get('capacidadTotal')?.hasError('min') && parqueaderoForm.get('capacidadTotal')?.touched) {
+        <mat-error>La capacidad debe ser mayor a 0</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+    
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" 
+          [disabled]="!parqueaderoForm.valid" 
+          (click)="onSubmit()">
+    {{ submitButtonText }}
+  </button>
+</div>

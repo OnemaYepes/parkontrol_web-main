@@ -1,0 +1,78 @@
+<div class="historial-container">
+  @if (loading) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando historial de reservas<p>
+    </div>
+  } @else {
+    @if (historialReserva.length > 0) {
+      <div class="table-container">
+        <table mat-table [dataSource]="historialReserva" class="historial-table mat-elevation-z1">
+
+
+
+          <ng-container matColumnDef="placa">
+            <th mat-header-cell *matHeaderCellDef>Placa</th>
+            <td mat-cell *matCellDef="let element">{{ element.placa }}</td>
+          </ng-container>
+
+
+
+        <ng-container matColumnDef="parqueadero">
+
+          <th mat-header-cell *matHeaderCellDef>Parqueadero</th>
+          <td mat-cell *matCellDef="let element">{{ element.parqueadero }}</td>
+        </ng-container>
+
+
+       
+        <ng-container matColumnDef="tipoVehiculo">
+
+          <th mat-header-cell *matHeaderCellDef>Tipo Vehiculo</th>
+          <td mat-cell *matCellDef="let element">{{ element.tipoVehiculo }}</td>
+        </ng-container>
+
+    
+
+            <ng-container matColumnDef="fechaEntrada">
+                  <th mat-header-cell *matHeaderCellDef>Fecha Entrada</th>
+                  <td mat-cell *matCellDef="let element">{{ element.fechaEntrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+            </ng-container>
+
+    
+
+        <ng-container matColumnDef="fechaSalida">
+
+          <th mat-header-cell *matHeaderCellDef>Fecha Salida</th>
+          
+          <td mat-cell *matCellDef="let element">
+            @if (element.fechaSalida) {
+              {{ element.fechaSalida | date: 'dd/MM/yyyy HH:mm' }}
+            } @else {
+              <span class="en-curso">En curso</span>
+            }
+          </td>
+        </ng-container>
+
+   
+        
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let element">
+            <span [class]="'estado-' + element.estado.toLowerCase()">
+              {{ element.estado }}
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    } @else {
+      <div class="sin-datos">
+        <p>No se encontraron reservas para mostrar</p>
+      </div>
+    }
+  }
+</div>

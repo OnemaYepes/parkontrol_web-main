@@ -1,0 +1,155 @@
+.reservas-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+mat-card-title {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  margin-bottom: 20px !important;
+}
+
+.header-content {
+  display: flex;
+  width: 100%;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+
+  }
+}
+
+
+.mensaje-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dc2626;
+  font-size: 14px;
+  margin-bottom: 16px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.mensaje-exito {
+  background-color: #e0f2fe;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb;
+  font-size: 14px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  
+  mat-spinner {
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #666;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    color: #999;
+  }
+
+  p {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+
+.table-container {
+  overflow-x: auto;
+}
+
+.reservas-table {
+  width: 100%;
+}
+
+
+.accion-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: auto;
+  
+    mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+
+
+.sin-datos {
+  text-align: center;
+  padding: 48px;
+  color: #6b7280;
+}
+
+.en-curso {
+  color: #2196F3;
+  font-style: italic;
+}
+
+mat-chip {
+  font-weight: 500;
+  border-radius: 16px;
+}

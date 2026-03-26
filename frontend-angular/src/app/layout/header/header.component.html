@@ -1,0 +1,17 @@
+<header class="header">
+  <!-- Título de la página -->
+  <div class="titulo-pagina">
+    <h1>{{ tituloPagina }}</h1>
+  </div>
+  
+  <!-- Información del usuario y botón logout -->
+  <div class="info-usuario" *ngIf="usuarioActual">
+    <div class="datos-usuario">
+      <span class="nombre-usuario">{{ usuarioActual.nombre || usuarioActual.correo }}</span>
+      <span class="rol-usuario">{{ usuarioActual.rol }}</span>
+    </div>
+    <button class="boton-logout" (click)="cerrarSesion()" title="Cerrar Sesión">
+      Cerrar sesion
+    </button>
+  </div>
+</header>

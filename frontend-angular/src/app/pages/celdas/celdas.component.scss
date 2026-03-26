@@ -1,0 +1,96 @@
+.celdas-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Layout principal del header
+mat-card-title {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  margin-bottom: 20px !important;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.right-content {
+  display: flex;
+  align-items: center;
+}
+
+// Estilo del mensaje de error
+.mensaje-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dc2626;
+  font-size: 14px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.filtro-container {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.filtro-parqueadero {
+  min-width: 300px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: #6b7280;
+}
+
+.no-data {
+  text-align: center;
+  padding: 48px;
+  color: #6b7280;
+}
+
+.celdas-table {
+  width: 100%;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.estado-select {
+  min-width: 140px;
+}
+
+.estado-select .mat-mdc-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+mat-chip {
+  font-weight: 500;
+}
+
+

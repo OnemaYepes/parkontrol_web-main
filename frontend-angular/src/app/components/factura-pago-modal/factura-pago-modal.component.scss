@@ -1,0 +1,46 @@
+mat-dialog-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+mat-dialog-content {
+  font-size: 1rem;
+  color: #4b5563;
+  background-color: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.factura-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.factura-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: #374151;
+}
+
+mat-icon {
+  color: #2563eb;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 48px;
+  color: #9ca3af;
+  font-size: 1.2rem;
+}

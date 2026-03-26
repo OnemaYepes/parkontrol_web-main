@@ -1,0 +1,50 @@
+<div class="facturas-lista-container">
+  <button mat-raised-button color="primary" (click)="abrirModalNuevaFactura()">
+    <span> Nueva Factura</span>
+  </button>
+
+  <table mat-table [dataSource]="facturas" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let factura">{{ factura.idFacturaElectronica }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="idPago">
+      <th mat-header-cell *matHeaderCellDef>ID Pago</th>
+      <td mat-cell *matCellDef="let factura">{{ factura.idPago }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="idClienteFactura">
+      <th mat-header-cell *matHeaderCellDef>Documento cliente</th>
+      <td mat-cell *matCellDef="let factura">{{ factura.numeroDocumento }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cufe">
+      <th mat-header-cell *matHeaderCellDef>CUFE</th>
+      <td mat-cell *matCellDef="let factura">{{ factura.cufe }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="enviada">
+      <th mat-header-cell *matHeaderCellDef>Monto total</th>
+      <td mat-cell *matCellDef="let factura">
+        <span [style.color]= "'green'">
+          {{ factura.monto | currency: 'COP':'symbol':'1.2-2'  }}
+        </span>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="fechaEmision">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let factura">{{ factura.fechaPago| date:'short' }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    @if(facturas.length === 0){
+      <tr>
+        <td colspan="6" class="no-datos">No hay facturas disponibles</td>
+      </tr>
+    }
+  </table>
+</div>

@@ -1,0 +1,179 @@
+<div class="vehiculos-container">
+
+  <mat-card class="search-card">
+    <mat-card-header>
+      <mat-card-title>Buscar Vehiculo</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="onBuscar()" class="search-form">
+
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Placa del vehIculo</mat-label>
+          <input 
+            matInput 
+            formControlName="placa" 
+            placeholder="Ingrese la placa"
+            maxlength="10">
+          @if (searchForm.get('placa')?.invalid && searchForm.get('placa')?.touched) {
+            <mat-error>
+              @if (searchForm.get('placa')?.errors?.['required']) {
+                La placa es requerida
+              } @else if (searchForm.get('placa')?.errors?.['minlength']) {
+                La placa debe tener al menos 3 caracteres
+
+             } @else if (searchForm.get('placa')?.errors?.['maxlength']) {
+                La placa no puede tener más de 10 caracteres
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <div class="search-actions">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="searchForm.invalid || loading"
+            class="search-button">
+            <mat-icon>search</mat-icon>
+            Buscar
+          </button>
+          
+
+          @if (vehiculo) {
+            <button 
+              mat-stroked-button 
+              color="warn"
+              type="button"
+              (click)="limpiarBusqueda()"
+              class="clear-button">
+              <mat-icon>clear</mat-icon>
+              Limpiar
+            </button>
+          }
+        </div>
+      </form>
+
+
+
+      @if (vehiculo) {
+        <div class="results-section">
+          <h3>Vehiculo</h3>
+          <table mat-table [dataSource]="[vehiculo]" class="vehiculo-table">
+            
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let vehiculo">{{ vehiculo.id }}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="placa">
+              <th mat-header-cell *matHeaderCellDef>Placa</th>
+              <td mat-cell *matCellDef="let vehiculo">{{ vehiculo.placa }}</td>
+            </ng-container>
+
+     
+
+            <ng-container matColumnDef="tipoVehiculo">
+
+              <th mat-header-cell *matHeaderCellDef>Tipo de vehiculo</th>
+              <td mat-cell *matCellDef="let vehiculo">
+                {{ vehiculo.tipoVehiculo?.nombre || vehiculo.idTipoVehiculo }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+
+  @if (errorMessage) {
+        <div class="error-message">
+          <mat-icon>error</mat-icon>
+          {{ errorMessage }}
+        </div>
+      }
+  
+  @if (mensajeExito) {
+    <div class="mensaje-exito">
+      <mat-icon>check_circle</mat-icon>
+      {{ mensajeExito }}
+    </div>
+  }
+
+
+  <mat-card class="create-card">
+    <mat-card-header>
+      <mat-card-title>Registrar nuevo Vehiculo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="createForm" (ngSubmit)="onCrear()" class="create-form">
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Placa</mat-label>
+          <input 
+            matInput 
+            formControlName="placa" 
+            placeholder="Ingrese la placa"
+            maxlength="10">
+          @if (createForm.get('placa')?.invalid && createForm.get('placa')?.touched) {
+            <mat-error>
+              @if (createForm.get('placa')?.errors?.['required']) {
+                La placa es requerida
+              } @else if (createForm.get('placa')?.errors?.['minlength']) {
+                La placa debe tener al menos 3 caracteres
+              } @else if (createForm.get('placa')?.errors?.['maxlength']) {
+                La placa no puede tener mas de 10 caracteres
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>ID Tipo de Vehículo</mat-label>
+          <input 
+            matInput 
+            formControlName="idTipoVehiculo" 
+            type="number"
+            placeholder="Ingrese el ID del tipo de vehículo"
+            min="1">
+          @if (createForm.get('idTipoVehiculo')?.invalid && createForm.get('idTipoVehiculo')?.touched) {
+            <mat-error>
+              @if (createForm.get('idTipoVehiculo')?.errors?.['required']) {
+                Es requerido ingresar el Id del tipo de vehiculo
+              } @else if (createForm.get('idTipoVehiculo')?.errors?.['min']) {
+                El Id tipo de vehiclo debe ser mayor a 0
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <div class="create-actions">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="createForm.invalid || loading"
+            class="create-button">
+            <mat-icon>add</mat-icon>
+            Registrar Vehiculo
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+
+  @if (loading) {
+    <div class="loading-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  
+</div>

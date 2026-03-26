@@ -1,0 +1,110 @@
+<div class="vistas-container">
+  <div class="header">
+    <h1>Vistas - Analisis de Datos</h1>
+    <div class="empresa-info">
+    </div>
+  </div>
+
+
+  <div class="estadisticas-grid">
+    <mat-card class="estadistica-card">
+      <mat-card-content>
+        <div class="estadistica-content">
+
+          <mat-icon class="estadistica-icon">attach_money</mat-icon>
+          <div class="estadistica-info">
+
+            <h3>Total Ingresos</h3>
+            <p class="estadistica-valor">{{ ingresosTotal | currency:'COP':'symbol':'1.0-0' }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="estadistica-card">
+      <mat-card-content>
+        <div class="estadistica-content">
+          <mat-icon class="estadistica-icon">receipt</mat-icon>
+          <div class="estadistica-info">
+            <h3>Total Facturacion</h3>
+            <p class="estadistica-valor">{{ facturacionTotal | currency:'COP':'symbol':'1.0-0' }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="estadistica-card">
+      <mat-card-content>
+        <div class="estadistica-content">
+
+          <mat-icon class="estadistica-icon">history</mat-icon>
+          <div class="estadistica-info">
+            <h3>Total Reservas</h3>
+            <p class="estadistica-valor">{{ totalReservas }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="estadistica-card">
+      <mat-card-content>
+        <div class="estadistica-content">
+          <mat-icon class="estadistica-icon">local_parking</mat-icon>
+          <div class="estadistica-info">
+            <h3>Promedio Ocupacion</h3>
+            <p class="estadistica-valor">{{ promedioOcupacion | number:'1.2-2' }}%</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  @if (loading) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Cargando datos...</p>
+    </div>
+  } @else {
+
+    <mat-tab-group class="vistas-tabs">
+      <mat-tab label="Ocupación de Parqueaderos">
+
+        <div class="tab-content">
+          <app-ocupacion-parqueaderos 
+            [ocupacionData]="ocupacion"
+            [loading]="loading">
+          </app-ocupacion-parqueaderos>
+        </div>
+
+      </mat-tab>
+
+
+      <mat-tab label="Historial de Reservas">
+        <div class="tab-content">
+          <app-historial-reservas 
+            [historialReserva]="historial"
+            [loading]="loading">
+          </app-historial-reservas>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Ingresos Mensuales">
+        <div class="tab-content">
+          <app-ingresos-mensuales 
+            [ingresosData]="ingresos"
+            [loading]="loading">
+          </app-ingresos-mensuales>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Facturacion Completa">
+        <div class="tab-content">
+          <app-facturacion-completa 
+            [facturacionData]="facturacion"
+            [loading]="loading">
+          </app-facturacion-completa>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  }
+</div>

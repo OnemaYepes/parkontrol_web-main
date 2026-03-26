@@ -1,0 +1,14 @@
+.filtro-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+
+.filtro-parqueadero {
+  min-width: 250px;
+}
+
+mat-form-field {
+  width: 20%;
+}

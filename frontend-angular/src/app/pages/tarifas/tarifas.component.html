@@ -1,0 +1,110 @@
+<div class="tarifas-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <div class="header-content">
+          <button mat-raised-button color="primary" (click)="abrirModalCrear()" [disabled]="parqueaderos.length === 0">
+            <mat-icon>add</mat-icon>
+            Nueva Tarifa
+          </button>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-container">
+          <mat-spinner></mat-spinner>
+          <p>Cargando tarifas...</p>
+        </div>
+      } @else {
+        @if (parqueaderos.length === 0) {
+          <div class="no-data">
+            <mat-icon>info</mat-icon>
+            <p>No hay parqueaderos registrados para su empresa</p>
+          </div>
+        } @else {
+          <app-filtro-parqueaderos
+            [parqueaderos]="parqueaderos"
+            [parqueaderoSeleccionado]="parqueaderoSeleccionado"
+            (parqueaderoCambia)="onParqueaderoCambia($event)">
+          </app-filtro-parqueaderos>
+
+          @if (errorMessage) {
+            <div class="mensaje-error">
+              <mat-icon color="warn">error</mat-icon>
+              <span>{{ errorMessage }}</span>
+            </div>
+          }
+
+          @if (tarifas.length === 0 && parqueaderoSeleccionado) {
+            <div class="no-data">
+              <mat-icon>info</mat-icon>
+              <p>No hay tarifas registradas para este parqueadero</p>
+            </div>
+          } @else if (parqueaderoSeleccionado) {
+            <div class="table-container">
+              <table mat-table [dataSource]="tarifas" class="tarifas-table">
+                
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let tarifa">{{ tarifa.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="idParqueadero">
+                  <th mat-header-cell *matHeaderCellDef>Parqueadero</th>
+                  <td mat-cell *matCellDef="let tarifa">{{ tarifa.parqueadero?.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="idTipoVehiculo">
+                  <th mat-header-cell *matHeaderCellDef>Tipo Vehiculo</th>
+                  <td mat-cell *matCellDef="let tarifa">{{ tarifa.tipoVehiculo?.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="precioFraccionHora">
+                  <th mat-header-cell *matHeaderCellDef>Precio Fraccion Hora</th>
+                  <td mat-cell *matCellDef="let tarifa">${{ tarifa.precioFraccionHora?.toLocaleString() || 0 }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="precioHoraAdicional">
+                  <th mat-header-cell *matHeaderCellDef>Precio Hora Adicional</th>
+                  <td mat-cell *matCellDef="let tarifa">
+                    @if (tarifa.precioHoraAdicional) {
+                      ${{ tarifa.precioHoraAdicional.toLocaleString() }}
+                    } @else {
+                      -
+                    }
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                  <td mat-cell *matCellDef="let tarifa">
+                    <button 
+                      mat-raised-button 
+                      color="accent" 
+                      (click)="abrirModalEditar(tarifa)"
+                      class="accion-btn">
+                      <mat-icon>edit</mat-icon>
+                      Editar
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              @if (tarifas.length === 0) {
+                <div class="sin-datos">
+                  <mat-icon>info</mat-icon>
+                  <p>No hay tarifas registradas en este parqueadero</p>
+                </div>
+              }
+            </div>
+          }
+        }
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

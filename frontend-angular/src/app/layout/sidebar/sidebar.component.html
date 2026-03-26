@@ -1,0 +1,21 @@
+<aside class="sidebar">
+  <!-- Logo -->
+  <div class="sidebar-header">
+      <span>Parkontrol</span>
+  </div>
+
+  <!-- Menú de navegación -->
+  <nav class="navigation">
+    <ul class="menu-list">
+      <li *ngFor="let elemento of elementosMenu" class="menu-item">
+        <a 
+          [routerLink]="elemento.ruta" 
+          routerLinkActive="active"
+          class="menu-link">
+          <mat-icon class="menu-icon">{{ elemento.icono }}</mat-icon>
+          <span>{{ elemento.etiqueta }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

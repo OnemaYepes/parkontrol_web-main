@@ -22,14 +22,6 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
-    coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/frontend-angular'),
-      subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
-    },
 
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
@@ -42,6 +34,13 @@ module.exports = function (config) {
     },
 
     reporters: ['progress', 'kjhtml', 'coverage'],
+
+    customLaunchers: {  
+      ChromeHeadlessCI: {  
+        base: 'ChromeHeadless',  
+        flags: ['--no-sandbox', '--disable-gpu'],  
+      },  
+    },  
     browsers: ['Chrome'],
     restartOnFileChange: true
   });

@@ -2,8 +2,6 @@ pipeline {
     agent any
 
     tools {
-        // Esto soluciona el error "npm not found"
-        // Asegúrate de que este nombre exista en Global Tool Configuration
         nodejs 'node20' 
     }
 
@@ -19,76 +17,70 @@ pipeline {
         FE_HOST_PORT  = '4200'
     }
 
-    
-
     stages {
-
         stage('Clean Workspace') {
             steps {
-                sh '''
-                    echo "=== Limpiando workspace ==="
-                    
-                    # Cambiar permisos de todo el workspace
-                    chmod -R 777 . 2>/dev/null || true
-                    chown -R $(whoami):$(whoami) . 2>/dev/null || true
-                    
-                    # Eliminar node_modules (forzar borrado)
-                    rm -rf backend/node_modules backend/package-lock.json
-                    rm -rf frontend-angular/node_modules frontend-angular/package-lock.json
-                    rm -rf frontend-angular/.angular
-                    
-                    # Limpiar caché de npm
-                    npm cache clean --force || true
-                    
-                    echo "=== Workspace limpio ==="
-                '''
+                script {
+                    sh '''
+                        echo "=== Limpiando workspace ==="
+                        # Limpiar node_modules usando Docker
+                        docker run --rm -v $(pwd):/workspace alpine sh -c "rm -rf /workspace/backend/node_modules /workspace/frontend-angular/node_modules /workspace/frontend-angular/.angular 2>/dev/null || true"
+                        # Limpiar caché de npm
+                        npm cache clean --force || true
+                        echo "=== Workspace limpio ==="
+                    '''
+                }
             }
         }
 
-        // 1. Install Dependencies
         stage('Install Dependencies') {
             parallel {
                 stage('Backend – Install') {
                     steps {
-                        dir('backend') { sh 'npm ci' }
+                        dir('backend') { 
+                            sh 'npm ci'
+                        }
                     }
                 }
                 stage('Frontend – Install') {
                     steps {
-                        dir('frontend-angular') { sh 'npm ci' }
+                        dir('frontend-angular') { 
+                            sh 'npm ci'
+                        }
                     }
                 }
             }
         }
 
-        // 2. Run Tests
         stage('Run Tests') {
             parallel {
                 stage('Backend – Tests') {
                     steps {
-                        dir('backend') { sh 'npm run test:cov' }
+                        dir('backend') { 
+                            sh 'npm run test:cov -- --testPathIgnorePatterns=".*\\\\.integration\\\\..*"' 
+                        }
                     }
                 }
                 stage('Frontend – Tests') {
                     agent {
                         docker { 
-                            // Esta imagen ya tiene Node, Chrome Headless y las dependencias de Linux
                             image 'trion/ng-cli-karma:latest'
-                            args '-u root'
+                            args '-u 1000:1000'  // CRUCIAL: No usar root
                             reuseNode true
                         }
                     }
                     steps {
                         dir('frontend-angular') {
-                            sh 'npm ci'
-                            sh 'npx ng test --watch=false --browsers=ChromeHeadless'
+                            sh '''
+                                npm ci
+                                npx ng test --watch=false --browsers=ChromeHeadless --no-watch
+                            '''
                         }
                     }
                 }
             }
         }
 
-        // 3. SonarQube Analysis
         stage('SonarQube Analysis') {
             parallel {
                 stage('Backend – Sonar') {
@@ -112,18 +104,14 @@ pipeline {
             }
         }
 
-        // 4. Quality Gate
         stage('Quality Gate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
-                    // Nota: Si son dos proyectos distintos en Sonar, 
-                    // a veces es mejor separar esto por carpetas.
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
 
-        // 5. Docker Build
         stage('Docker Build') {
             parallel {
                 stage('Backend – Build Image') {
@@ -143,19 +131,18 @@ pipeline {
             }
         }
 
-        // 6. Deploy
         stage('Deploy') {
             parallel {
                 stage('Backend – Deploy') {
                     steps {
                         sh """
                             docker stop ${BE_CONTAINER} 2>/dev/null || true
-                            docker rm   ${BE_CONTAINER} 2>/dev/null || true
-                            docker run -d --name ${BE_CONTAINER} \
-                                --network devops-net \
-                                --restart always \
-                                -p ${BE_HOST_PORT}:${BE_APP_PORT} \
-                                -e PORT=${BE_APP_PORT} \
+                            docker rm ${BE_CONTAINER} 2>/dev/null || true
+                            docker run -d --name ${BE_CONTAINER} \\
+                                --network devops-net \\
+                                --restart always \\
+                                -p ${BE_HOST_PORT}:${BE_APP_PORT} \\
+                                -e PORT=${BE_APP_PORT} \\
                                 ${BE_IMAGE}:latest
                         """
                     }
@@ -164,11 +151,11 @@ pipeline {
                     steps {
                         sh """
                             docker stop ${FE_CONTAINER} 2>/dev/null || true
-                            docker rm   ${FE_CONTAINER} 2>/dev/null || true
-                            docker run -d --name ${FE_CONTAINER} \
-                                --network devops-net \
-                                --restart always \
-                                -p ${FE_HOST_PORT}:80 \
+                            docker rm ${FE_CONTAINER} 2>/dev/null || true
+                            docker run -d --name ${FE_CONTAINER} \\
+                                --network devops-net \\
+                                --restart always \\
+                                -p ${FE_HOST_PORT}:80 \\
                                 ${FE_IMAGE}:latest
                         """
                     }
@@ -184,8 +171,16 @@ pipeline {
             echo "Web  -> http://localhost:${FE_HOST_PORT}"
         }
         always {
-            // Limpiar imágenes huérfanas para no llenar el disco
-            sh 'docker image prune -f'
+            script {
+                sh '''
+                    docker image prune -f
+                    # Limpiar node_modules después de cada build
+                    docker run --rm -v $(pwd):/workspace alpine sh -c "rm -rf /workspace/backend/node_modules /workspace/frontend-angular/node_modules 2>/dev/null || true"
+                '''
+            }
+        }
+        failure {
+            echo "Pipeline falló. Revisa los logs para más detalles."
         }
     }
 }

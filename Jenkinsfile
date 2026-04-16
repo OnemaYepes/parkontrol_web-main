@@ -45,7 +45,10 @@ pipeline {
                 stage('Frontend – Install') {
                     steps {
                         dir('frontend-angular') { 
-                            sh 'npm ci'
+                            sh '''
+                                # Intentar con permisos forzados
+                                npm install --force || npm ci --force
+                            '''
                         }
                     }
                 }

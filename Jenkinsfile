@@ -75,14 +75,11 @@ pipeline {
                     steps {
                         dir('frontend-angular') {
                             sh '''
-                                # Establecer variable de entorno para Chrome
-                                export CHROME_BIN=/usr/bin/google-chrome
+                                # Ejecutamos con un timeout de sistema por si acaso
+                                timeout 300s npx ng test --watch=false --no-progress --browsers=ChromeHeadlessCI || (echo "Tests fallaron o excedieron tiempo" && exit 1)
                                 
-                                # Ejecutar con flags de CI reforzados
-                                npx ng test --no-watch --no-progress --browsers=ChromeHeadlessCI || true
-                                
-                                # Limpieza radical de procesos
-                                ps aux | grep karma | awk '{print $2}' | xargs kill -9 2>/dev/null || true
+                                # Matar cualquier proceso que use el puerto por defecto de Karma (9876)
+                                fuser -k 9876/tcp || true
                             '''
                         }
                     }

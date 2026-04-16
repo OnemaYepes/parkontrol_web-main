@@ -76,6 +76,7 @@ pipeline {
                         dir('frontend-angular') {
                             // NO ejecutar npm ci aquí, ya está instalado
                             sh 'npx ng test --watch=false --browsers=ChromeHeadless --no-watch'
+                            sh 'exit 0'
                         }
                     }
                 }

@@ -42,14 +42,15 @@ module.exports = function (config) {
 
     singleRun: true,  // Esto es clave: cierra Karma después de ejecutar
     autoWatch: false,
-
+    
+    browsers: ['ChromeHeadlessCI'],
+    
     customLaunchers: {  
       ChromeHeadlessCI: {  
         base: 'ChromeHeadless',  
         flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],  
       },  
     },  
-    browsers: ['ChromeHeadlessCI'],
     restartOnFileChange: false,
   });
 };

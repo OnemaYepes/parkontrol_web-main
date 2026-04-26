@@ -1,9 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18-bullseye'
-            args '-u root'
-        }
+    agent any
+
+    environment {
+        SONARQUBE_ENV = 'SonarQube'
     }
     
     stages {

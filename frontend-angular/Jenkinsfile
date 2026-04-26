@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:18-bullseye'
+            args '-u root'
+        }
+    }
+    
+    stages {
+        
+        stage('Frontend: Install') {
+            steps {
+                dir('frontend-angular') {
+                    sh 'npm ci'
+                    sh 'npm install -g @angular/cli'
+                    sh 'apt-get update && apt-get install -y chromium'
+                }
+            }
+        }
+        
+        stage('Frontend: Test CI') {
+            steps {
+                dir('frontend-angular') {
+                    withEnv(['CHROME_BIN=/usr/bin/chromium']) {
+                        sh 'npm run test:ci'
+                    }
+                }
+            }
+        }
+        
+        stage('Sonar Analysis') {
+            steps {
+                dir('backend') {
+                    sh 'npm install -g sonarqube-scanner'
+                    sh 'sonar-scanner'
+                }
+                dir('frontend-angular') {
+                    sh 'npm run sonar'
+                }
+            }
+        }
+    }
+}

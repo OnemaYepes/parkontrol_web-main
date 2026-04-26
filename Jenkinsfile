@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS-18'  // ¿Tu local usa Node 18 o 20+?
+        nodejs 'NodeJS-24'  // ¿Tu local usa Node 18 o 20+?
     }
 
     environment {

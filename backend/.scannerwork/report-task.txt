@@ -1,6 +1,0 @@
-projectKey=parkontrol-backend
-serverUrl=http://localhost:9000
-serverVersion=26.3.0.120487
-dashboardUrl=http://localhost:9000/dashboard?id=parkontrol-backend
-ceTaskId=83b2946c-a18e-4153-a59b-10965d1c3354
-ceTaskUrl=http://localhost:9000/api/ce/task?id=83b2946c-a18e-4153-a59b-10965d1c3354

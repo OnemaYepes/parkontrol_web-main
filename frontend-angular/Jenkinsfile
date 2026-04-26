@@ -19,20 +19,26 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh 'npm install'
+                dir('frontend-angular') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run tests with coverage') {
             steps {
-                sh 'npm run test:ci'
+                dir('frontend-angular') {
+                    sh 'npm run test:ci'
+                }
             }
         }
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // nombre en Jenkins
-                    sh "${SONAR_HOME}/bin/sonar-scanner"
+                dir('frontend-angular') {
+                    withSonarQubeEnv('SonarQube') { // nombre en Jenkins
+                        sh "${SONAR_HOME}/bin/sonar-scanner"
+                    }
                 }
             }
         }

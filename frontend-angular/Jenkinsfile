@@ -1,40 +1,42 @@
 pipeline {
-    agent {
-        docker {
-            image 'cypress/browsers:node18.12.0-chrome107'
-            args '--user=root'
-        }
-    }
+    agent any
 
     environment {
-        SONARQUBE_ENV = 'SonarQube'
-        CHROME_BIN = '/usr/bin/google-chrome'
+        SONAR_HOME = tool 'SonarQube' // nombre configurado en Jenkins
     }
 
     stages {
 
-        stage('Install') {
+        stage('Checkout') {
             steps {
-                dir('frontend-angular') {
-                    sh 'npm ci'
+                checkout scm
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run tests with coverage') {
+            steps {
+                sh 'npm run test:ci'
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') { // nombre en Jenkins
+                    sh "${SONAR_HOME}/bin/sonar-scanner"
                 }
             }
         }
 
-        stage('Test CI') {
+        stage('Quality Gate') {
             steps {
-                dir('frontend-angular') {
-                    sh 'npm run test:ci'
-                }
-            }
-        }
-
-        stage('Sonar Analysis') {
-            steps {
-                dir('frontend-angular') {
-                    withSonarQubeEnv("${SONARQUBE_ENV}") {
-                        sh 'npx sonar-scanner'
-                    }
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }

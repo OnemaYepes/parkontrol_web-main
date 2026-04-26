@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         SONAR_HOME = tool 'SonarQube' // nombre configurado en Jenkins
+        CHROME_BIN = "/usr/bin/chromium"
     }
 
     stages {

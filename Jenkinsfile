@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS-18'
+    }
+
     environment {
         SONARQUBE_ENV = 'SonarQube'
     }

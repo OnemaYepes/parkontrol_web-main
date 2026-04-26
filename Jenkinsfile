@@ -19,36 +19,10 @@ pipeline {
             }
         }
 
-        stage('Test + Coverage + DEBUG') {
+        stage('Test + Coverage') {
             steps {
                 dir('backend') {
-                    sh '''
-                        echo "=== Node version ==="
-                        node --version
-                        
-                        echo "=== npm version ==="
-                        npm --version
-                        
-                        npm run test:cov
-                        
-                        echo "=== Verificando archivos de coverage ==="
-                        ls -la coverage/
-                        
-                        echo "=== Contenido de lcov.info (primeras 30 líneas) ==="
-                        head -30 coverage/lcov.info
-                        
-                        echo "=== Total de archivos en lcov.info ==="
-                        grep -c "SF:" coverage/lcov.info
-                        
-                        echo "=== Rutas en lcov.info ==="
-                        grep "SF:" coverage/lcov.info
-                        
-                        echo "=== Directorio actual ==="
-                        pwd
-                        
-                        echo "=== Estructura de src/ ==="
-                        ls -la src/
-                    '''
+                    sh 'npm run test:cov'
                 }
             }
         }
@@ -57,12 +31,7 @@ pipeline {
             steps {
                 dir('backend') {
                     withSonarQubeEnv("${SONARQUBE_ENV}") {
-                        sh '''
-                            echo "=== Ejecutando sonar-scanner desde: ==="
-                            pwd
-                            
-                            npx sonar-scanner -X  # El -X es para modo debug
-                        '''
+                        sh 'npx sonar-scanner'
                     }
                 }
             }

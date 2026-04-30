@@ -17,12 +17,19 @@ pipeline {
             }
         }
 
+        stage('Diagnóstico') {
+            steps {
+                sh 'docker --version'
+                sh 'docker compose version || docker-compose --version'
+            }
+        }
+
         stage('Levantar Entorno E2E') {
             steps {
                 script {
                     echo "Limpiando volúmenes previos para asegurar carga de backup..."
-                    sh 'docker-compose down -v' // El -v borra el volumen de datos viejo
-                    sh 'docker-compose up -d --build'
+                    sh 'docker compose down -v' // El -v borra el volumen de datos viejo
+                    sh 'docker compose up -d --build'
                     
                     echo "Esperando a Oracle (suele tardar un poco más)..."
                     // Oracle XE es pesado, dale tiempo para procesar el backup.sql

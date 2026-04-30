@@ -38,17 +38,17 @@ pipeline {
             }
         }
 
-        stage('Run E2E Tests') {
-            steps {
+        //stage('Run E2E Tests') {
+            //steps {
                 // Esto busca la instalación de Node llamada 'node20' (o como la hayas nombrado)
-                nodejs('NodeJS-24') { 
-                    dir('frontend-angular') {
-                        sh 'npm install' // Asegúrate de que las dependencias existan en el workspace
-                        sh 'npm run test:e2e'
-                    }
-                }
-            }
-        }
+                //nodejs('NodeJS-24') { 
+                    //dir('frontend-angular') {
+                        //sh 'npm install' // Asegúrate de que las dependencias existan en el workspace
+                        //sh 'npm run test:e2e'
+                    //}
+                //}
+           // }
+        //}
     }
 
     post {

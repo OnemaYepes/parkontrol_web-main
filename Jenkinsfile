@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        /*stage('Run E2E Tests') {
+        stage('Run E2E Tests') {
             steps {
                  Esto busca la instalación de Node llamada 'node20' (o como la hayas nombrado)
                 nodejs('NodeJS-24') { 
@@ -48,7 +48,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage('Deploy') {
             steps {

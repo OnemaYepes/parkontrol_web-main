@@ -27,6 +27,7 @@ services:
       DB_USER: system
       DB_PASSWORD: oracle
       DB_NAME: XE
+      JWT_SECRET: dev-secret
     networks:
       - default
 

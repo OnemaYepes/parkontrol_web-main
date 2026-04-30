@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const PAGOS_URL = 'http://angular-frontend/pagos';
+const PAGOS_URL = 'http://localhost:4200/pagos';
 
 let actor;
 

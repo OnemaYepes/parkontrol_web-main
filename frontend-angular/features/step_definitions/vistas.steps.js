@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const VISTAS_URL = 'http://angular-frontend/vistas';
+const VISTAS_URL = 'http://localhost:4200/vistas';
 
 let actor;
 

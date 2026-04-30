@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const CELDAS_URL = 'http://angular-frontend/celdas';
+const CELDAS_URL = 'http://localhost:4200/celdas';
 
 let actor;
 

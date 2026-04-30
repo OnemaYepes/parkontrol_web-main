@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const PARQUEADEROS_URL = 'http://angular-frontend/parqueaderos';
+const PARQUEADEROS_URL = 'http://localhost:4200/parqueaderos';
 
 let actor;
 

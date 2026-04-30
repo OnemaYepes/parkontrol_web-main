@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const TARIFAS_URL = 'http://angular-frontend/tarifas';
+const TARIFAS_URL = 'http://localhost:4200/tarifas';
 
 let actor;
 

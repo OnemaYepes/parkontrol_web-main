@@ -40,9 +40,10 @@ pipeline {
 
         stage('Run E2E Tests') {
             steps {
-                dir('frontend-angular') {
-                    script {
-                        // Asegúrate de que tu script de test use el modo headless
+                // Esto busca la instalación de Node llamada 'node20' (o como la hayas nombrado)
+                nodejs('NodeJS-24') { 
+                    dir('frontend-angular') {
+                        sh 'npm install' // Asegúrate de que las dependencias existan en el workspace
                         sh 'npm run test:e2e'
                     }
                 }

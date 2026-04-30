@@ -2,7 +2,7 @@ const { By, until } = require('selenium-webdriver');
 
 class loginFailTask {
   static async performAs(actor) {
-    await actor.driver.get('http://127.0.0.1:4200/login');
+    await actor.driver.get('http://angular-frontend/login');
 
     const correo = await actor.driver.wait(
       until.elementLocated(By.css('input[formControlName="correo"]')),

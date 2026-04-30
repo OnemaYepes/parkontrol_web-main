@@ -10,7 +10,7 @@ setDefaultTimeout(60000);
 const Actor = require('../../screenplay/actor');
 const LoginTask = require('../../screenplay/tasks/login.task');
 
-const VEHICULOS_URL = 'http://127.0.0.1:4200/vehiculos';
+const VEHICULOS_URL = 'http://angular-frontend/vehiculos';
 
 let actor;
 

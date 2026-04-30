@@ -19,6 +19,14 @@ pipeline {
             }
         }
 
+        stage('Test (Nonfunctional)') {
+            steps {
+                dir('backend') {
+                    sh 'npx jest src/nonfunctional --runInBand'
+                }
+            }
+        }
+
         stage('Test + Coverage') {
             steps {
                 dir('backend') {

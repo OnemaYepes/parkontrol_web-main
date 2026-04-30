@@ -27,16 +27,13 @@ pipeline {
         stage('Levantar Entorno E2E') {
             steps {
                 script {
-                    // Limpieza y subida
-                    sh 'docker-compose down -v'
+                    echo "Limpiando volúmenes previos para asegurar carga de backup..."
+                    sh 'docker-compose down -v' // El -v borra el volumen de datos viejo
                     sh 'docker-compose up -d --build'
                     
-                    echo "Esperando a que el frontend (Nginx) esté listo en el puerto 4200..."
-                    // Esto reintenta cada 2 segundos hasta que el puerto 4200 responda algo
-                    sh 'timeout 40s bash -c "until curl -s http://localhost:4200 > /dev/null; do sleep 2; done"'
-                    
-                    echo "Dando 10 segundos extra para estabilidad del Backend..."
-                    sleep 10
+                    echo "Esperando a Oracle (suele tardar un poco más)..."
+                    // Oracle XE es pesado, dale tiempo para procesar el backup.sql
+                    sh 'sleep 60' 
                 }
             }
         }

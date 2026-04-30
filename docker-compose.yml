@@ -22,7 +22,7 @@ services:
     depends_on:
       - oracle
     environment:
-      DB_HOST: oracle
+      DB_HOST: oracle-db
       DB_PORT: 1521
       DB_USER: system
       DB_PASSWORD: oracle

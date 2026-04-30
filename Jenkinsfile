@@ -38,21 +38,34 @@ pipeline {
             }
         }
 
-        //stage('Run E2E Tests') {
-            //steps {
-                // Esto busca la instalación de Node llamada 'node20' (o como la hayas nombrado)
-                //nodejs('NodeJS-24') { 
-                    //dir('frontend-angular') {
-                        //sh 'npm install' // Asegúrate de que las dependencias existan en el workspace
-                        //sh 'npm run test:e2e'
-                    //}
-                //}
-           // }
-        //}
+        /*stage('Run E2E Tests') {
+            steps {
+                 Esto busca la instalación de Node llamada 'node20' (o como la hayas nombrado)
+                nodejs('NodeJS-24') { 
+                    dir('frontend-angular') {
+                        sh 'npm install' // Asegúrate de que las dependencias existan en el workspace
+                        sh 'npm run test:e2e'
+                    }
+                }
+            }
+        }*/
+
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Desplegando aplicación final..."
+
+                    sh 'docker-compose down -v'
+                    sh 'docker-compose up -d --build'
+
+                    echo "App corriendo en producción 🚀"
+                }
+            }
+        }
     }
 
     post {
-        always {
+        failure {
             echo "Bajando servicios..."
             sh 'docker-compose down -v'
         }

@@ -1,9 +1,8 @@
 version: '3.8'
 
 services:
-
   oracle:
-    image: gvenzl/oracle-xe
+    image: gvenzl/oracle-xe:latest
     container_name: oracle-db
     ports:
       - "1522:1521"
@@ -11,6 +10,9 @@ services:
       ORACLE_PASSWORD: oracle
     volumes:
       - oracle-data:/opt/oracle/oradata
+      # 🔥 AQUÍ CARGAS TU BACKUP LOCAL
+      # Se ejecutará automáticamente al crear el contenedor por primera vez
+      - ./backup.sql:/container-entrypoint-initdb.d/setup.sql 
 
   backend:
     build: ./backend
@@ -25,6 +27,8 @@ services:
       DB_USER: system
       DB_PASSWORD: oracle
       DB_NAME: XE
+    networks:
+      - default
 
   frontend:
     build: ./frontend-angular
@@ -33,6 +37,8 @@ services:
       - "4200:80"
     depends_on:
       - backend
+    networks:
+      - default
 
 volumes:
   oracle-data:

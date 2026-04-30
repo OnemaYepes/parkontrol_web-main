@@ -41,8 +41,8 @@ Then('debería ver el dashboard', async function () {
 });
 
 // Cierra el browser al terminar cada escenario
-After(async function () {
-  if (actor && actor.driver) {
-    await actor.driver.quit();
-  }
-});
+//After(async function () {
+//  if (actor && actor.driver) {
+//    await actor.driver.quit();
+//  }
+//});

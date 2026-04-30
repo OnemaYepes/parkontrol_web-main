@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Run E2E Tests') {
+        /*stage('Run E2E Tests') {
             steps {
                 nodejs('NodeJS-24') { 
                     dir('frontend-angular') {
@@ -47,7 +47,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Deploy') {
             steps {

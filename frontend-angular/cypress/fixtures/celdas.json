@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "idParqueadero": 1,
+    "idTipoCelda": 1,
+    "idSensor": 1,
+    "estado": "LIBRE",
+    "tipoCelda": { "id": 1, "nombre": "Carro" },
+    "sensor": { "id": 1, "codigo": "S-1", "tipo": "ULTRASONICO" }
+  },
+  {
+    "id": 2,
+    "idParqueadero": 1,
+    "idTipoCelda": 2,
+    "idSensor": 2,
+    "estado": "OCUPADA",
+    "tipoCelda": { "id": 2, "nombre": "Moto" },
+    "sensor": { "id": 2, "codigo": "S-2", "tipo": "ULTRASONICO" }
+  }
+]

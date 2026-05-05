@@ -39,7 +39,7 @@
           </app-filtro-parqueaderos>
 
           @if (errorMessage) {
-            <div class="mensaje-error">
+            <div class="mensaje-error" data-cy="reservas-error">
               <mat-icon color="warn">error</mat-icon>
               <span>{{ errorMessage }}</span>
             </div>
@@ -48,7 +48,7 @@
           @if (parqueaderoSeleccionado) {
             <div class="table-container">
               @if (mensajeExito) {
-                <div class="mensaje-exito">
+                <div class="mensaje-exito" data-cy="reservas-exito">
                   <mat-icon color="primary">check_circle</mat-icon>
                   <span>{{ mensajeExito }}</span>
                 </div>
@@ -105,7 +105,8 @@
                         mat-raised-button 
                         color="accent" 
                         (click)="finalizarReserva(reserva)"
-                        class="accion-btn">
+                        class="accion-btn"
+                        data-cy="reserva-finalizar">
                         <mat-icon>check</mat-icon>
                         Finalizar
                       </button>

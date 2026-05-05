@@ -1,0 +1,15 @@
+[
+  {
+    "idFacturaElectronica": 401,
+    "tipoDocumento": "CC",
+    "numeroDocumento": "123456",
+    "correo": "cliente@demo.com",
+    "idPago": 9001,
+    "monto": 25000,
+    "metodoPago": "EFECTIVO",
+    "fechaPago": "2026-05-05T12:00:00.000Z",
+    "cufe": "CUFE-001",
+    "urlPdf": "http://example.com/factura.pdf",
+    "enviada": 1
+  }
+]

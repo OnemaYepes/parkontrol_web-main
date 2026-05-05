@@ -1,0 +1,10 @@
+[
+  {
+    "idParqueadero": 1,
+    "nombreParqueadero": "Parqueadero Central",
+    "nombreEmpresa": "Empresa Demo",
+    "totalCeldas": 100,
+    "celdasOcupadas": 30,
+    "celdasLibres": 70
+  }
+]

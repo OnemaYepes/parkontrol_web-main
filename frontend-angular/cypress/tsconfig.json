@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["cypress", "node"],
+    "target": "ES2020",
+    "isolatedModules": false
+  },
+  "include": ["**/*.ts"]
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "tipoDocumento": "CC",
+    "numeroDocumento": "123456",
+    "correo": "cliente@demo.com"
+  }
+]

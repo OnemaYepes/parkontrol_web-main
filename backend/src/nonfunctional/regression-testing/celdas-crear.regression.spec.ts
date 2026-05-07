@@ -12,4 +12,8 @@ describe('Regression Testing - Crear celda (Backend)', () => {
 
     await expect(service.crear({ idParqueadero: 1, idTipoCelda: 999, idSensor: 1, estado: 'LIBRE' } as any)).rejects.toBeInstanceOf(NotFoundException);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

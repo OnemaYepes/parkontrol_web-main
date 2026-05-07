@@ -11,4 +11,8 @@ describe('Regression Testing - Finalizar reserva (Backend)', () => {
 
     await expect(service.finalizarReserva(999)).rejects.toBeInstanceOf(NotFoundException);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

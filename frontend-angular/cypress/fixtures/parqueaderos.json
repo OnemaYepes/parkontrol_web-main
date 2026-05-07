@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nombre": "Parqueadero Central",
+    "capacidadTotal": 100,
+    "ubicacion": "Centro",
+    "idEmpresa": 10
+  },
+  {
+    "id": 2,
+    "nombre": "Parqueadero Norte",
+    "capacidadTotal": 50,
+    "ubicacion": "Norte",
+    "idEmpresa": 10
+  }
+]

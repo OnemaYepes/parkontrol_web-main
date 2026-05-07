@@ -9,4 +9,8 @@ describe('Regression Testing - Consultar ocupacion por parqueadero (Backend)', (
 
     expect(result).toBeNull();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

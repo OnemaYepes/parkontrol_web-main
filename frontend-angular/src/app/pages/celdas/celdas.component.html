@@ -4,7 +4,7 @@
       <mat-card-title>
         @if(usuarioIsAdmin) {
           <div class="header-content">
-            <button mat-raised-button color="primary" (click)="abrirModalCrear()" [disabled]="parqueaderos.length === 0">
+            <button mat-raised-button color="primary" (click)="abrirModalCrear()" [disabled]="parqueaderos.length === 0" data-cy="celdas-nueva">
               <mat-icon>add</mat-icon>
               Nueva Celda
             </button>
@@ -35,7 +35,7 @@
           </app-filtro-parqueaderos>
 
           @if (errorMessage) {
-            <div class="mensaje-error">
+            <div class="mensaje-error" data-cy="celdas-error">
               <mat-icon color="warn">error</mat-icon>
               <span>{{ errorMessage }}</span>
             </div>
@@ -50,7 +50,7 @@
           } @else if (parqueaderoSeleccionado) {
 
             <div class="table-container">
-              <table mat-table [dataSource]="celdasFiltradas" class="celdas-table">         
+              <table mat-table [dataSource]="celdasFiltradas" class="celdas-table" data-cy="celdas-table">         
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef>ID</th>
                   <td mat-cell *matCellDef="let celda">{{ celda.id }}</td>

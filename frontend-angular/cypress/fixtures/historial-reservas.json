@@ -1,0 +1,12 @@
+[
+  {
+    "idReserva": 101,
+    "placa": "ABC123",
+    "tipoVehiculo": "Carro",
+    "idCelda": 1,
+    "parqueadero": "Parqueadero Central",
+    "fechaEntrada": "2026-05-05T10:00:00.000Z",
+    "fechaSalida": null,
+    "estado": "ABIERTA"
+  }
+]

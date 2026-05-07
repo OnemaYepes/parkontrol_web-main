@@ -5,7 +5,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Parqueadero</mat-label>
-      <mat-select formControlName="idParqueadero" placeholder="Seleccione un parqueadero">
+      <mat-select formControlName="idParqueadero" placeholder="Seleccione un parqueadero" data-cy="celda-parqueadero">
         @for (parqueadero of data.parqueaderos; track parqueadero.id) {
           <mat-option [value]="parqueadero.id">
             {{ parqueadero.nombre }}
@@ -19,7 +19,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>ID Tipo Celda</mat-label>
-      <input matInput type="number" formControlName="idTipoCelda" placeholder="Ingrese el ID del tipo de celda">
+      <input matInput type="number" formControlName="idTipoCelda" placeholder="Ingrese el ID del tipo de celda" data-cy="celda-tipo">
       @if (celdaForm.get('idTipoCelda')?.hasError('required') && celdaForm.get('idTipoCelda')?.touched) {
         <mat-error>El tipo de celda es requerido</mat-error>
       }
@@ -30,7 +30,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>ID Sensor</mat-label>
-      <input matInput type="number" formControlName="idSensor" placeholder="Ingrese el ID del sensor">
+      <input matInput type="number" formControlName="idSensor" placeholder="Ingrese el ID del sensor" data-cy="celda-sensor">
       @if (celdaForm.get('idSensor')?.hasError('required') && celdaForm.get('idSensor')?.touched) {
         <mat-error>El sensor es requerido</mat-error>
       }
@@ -41,7 +41,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Estado</mat-label>
-      <mat-select formControlName="estado" placeholder="Seleccione el estado">
+      <mat-select formControlName="estado" placeholder="Seleccione el estado" data-cy="celda-estado">
         @for (estado of estadosCeldas; track estado.valor) {
           <mat-option [value]="estado.valor">
             {{ estado.nombre }}
@@ -55,7 +55,7 @@
 
     <div mat-dialog-actions class="dialog-actions">
       <button mat-button type="button" (click)="onCancel()">Cancelar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="celdaForm.invalid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="celdaForm.invalid" data-cy="celda-submit">
         Crear Celda
       </button>
     </div>

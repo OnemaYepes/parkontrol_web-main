@@ -9,4 +9,8 @@ describe('Security Testing - Consultar ocupacion por parqueadero (Backend)', () 
 
     expect(dataSource.query).toHaveBeenCalledWith(expect.any(String), ['1 OR 1=1']);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

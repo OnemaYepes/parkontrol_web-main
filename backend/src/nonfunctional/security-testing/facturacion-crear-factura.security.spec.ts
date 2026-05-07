@@ -12,4 +12,8 @@ describe('Security Testing - Generar factura electronica (Backend)', () => {
     await expect(service.crearFactura({ idPago: 1, idClienteFactura: 777, cufe: 'C', urlPdf: 'U' } as any)).rejects.toThrow();
     expect(facturaRepo.save).not.toHaveBeenCalled();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

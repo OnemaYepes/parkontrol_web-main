@@ -118,8 +118,4 @@ export const expectFailure = (action: Promise<unknown>) => {
   };
 
   return fluent;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

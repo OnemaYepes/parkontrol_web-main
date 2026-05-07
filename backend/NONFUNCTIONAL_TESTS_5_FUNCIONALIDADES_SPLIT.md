@@ -1,5 +1,5 @@
 # Pruebas no funcionales por funcionalidad (Backend)
-
+Cambio
 ## Objetivo
 Este documento describe las pruebas no funcionales divididas por tipo de testing y por funcionalidad para backend.
 

@@ -22,4 +22,8 @@ describe('Security Testing - Iniciar sesion (Backend)', () => {
     const payload = sign.mock.calls[0][0];
     expect(payload.contrasena).toBeUndefined();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

@@ -17,4 +17,8 @@ describe('API Testing - Consultar ocupacion por parqueadero (Backend)', () => {
 
     expect(result).toEqual({ idParqueadero: 321, totalCeldas: 10, celdasOcupadas: 3 });
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

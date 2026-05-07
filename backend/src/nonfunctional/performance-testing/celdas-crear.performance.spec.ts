@@ -15,4 +15,8 @@ describe('Performance Testing - Crear celda (Backend)', () => {
 
     expect(elapsed).toBeLessThan(300);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

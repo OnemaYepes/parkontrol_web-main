@@ -12,4 +12,8 @@ describe('Security Testing - Finalizar reserva (Backend)', () => {
     await expect(service.finalizarReserva(404)).rejects.toThrow();
     expect(celdasService.actualizarEstado).not.toHaveBeenCalled();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

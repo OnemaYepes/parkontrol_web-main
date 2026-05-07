@@ -39,4 +39,8 @@ describe('API Testing - Iniciar sesion (Backend)', () => {
 
     expect(result).toEqual({ access_token: 'token-prueba' });
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

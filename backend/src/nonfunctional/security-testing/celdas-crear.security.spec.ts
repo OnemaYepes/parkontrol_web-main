@@ -13,4 +13,8 @@ describe('Security Testing - Crear celda (Backend)', () => {
     await expect(service.crear({ idParqueadero: 1, idTipoCelda: 99, idSensor: 88, estado: 'LIBRE' } as any)).rejects.toThrow();
     expect(celdaRepo.save).not.toHaveBeenCalled();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

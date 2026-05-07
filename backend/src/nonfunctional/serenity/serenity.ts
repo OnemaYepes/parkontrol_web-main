@@ -24,4 +24,8 @@ export const Steps = {
   crearFactura: <T>(action: () => Promise<T> | T): SerenityStep<T> => {
     return async () => action();
   },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

@@ -20,4 +20,8 @@ describe('Regression Testing - Iniciar sesion (Backend)', () => {
 
     await expect(service.login({ correo: 'x@x.com', contrasena: '123' } as any)).rejects.toBeInstanceOf(UnauthorizedException);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

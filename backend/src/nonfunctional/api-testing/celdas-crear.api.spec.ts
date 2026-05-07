@@ -26,4 +26,8 @@ describe('API Testing - Crear celda (Backend)', () => {
     expect(result.estado).toBe('LIBRE');
     expect(celdaRepo.save).toHaveBeenCalledTimes(1);
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

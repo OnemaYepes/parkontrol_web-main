@@ -25,4 +25,8 @@ describe('API Testing - Generar factura electronica (Backend)', () => {
     expect(result.enviada).toBe('N');
     expect(result.cufe).toBe('CUFE-1');
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

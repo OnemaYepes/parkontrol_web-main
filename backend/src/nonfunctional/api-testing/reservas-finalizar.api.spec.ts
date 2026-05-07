@@ -24,4 +24,8 @@ describe('API Testing - Finalizar reserva (Backend)', () => {
     expect(result.estado).toBe('CERRADA');
     expect(celdasService.actualizarEstado).toHaveBeenCalledWith(20, 'LIBRE');
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6

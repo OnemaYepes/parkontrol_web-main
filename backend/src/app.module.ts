@@ -27,11 +27,19 @@ import { VistasModule } from './vistas/vistas.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'oracle',
+<<<<<<< HEAD
         host: configService.get<string>('DB_HOST'),
         port: Number(configService.get<number>('DB_PORT')),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         serviceName: configService.get<string>('DB_SID') || 'XEPDB1',
+=======
+        host: configService.get<string>('DB_HOST') || 'localhost',
+        port: Number(configService.get<number>('DB_PORT') || 1521),
+        username: configService.get<string>('DB_USERNAME') || 'parkontrol',
+        password: configService.get<string>('DB_PASSWORD') || 'parkontrol',
+        sid: configService.get<string>('DB_SID') || 'XE',
+>>>>>>> 5c8ed22fb786ea560cc3dd99e8c132c204f43ab6
         synchronize: false,
         dropSchema: false,
         autoLoadEntities: true,

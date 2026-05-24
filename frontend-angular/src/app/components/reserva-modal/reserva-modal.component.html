@@ -8,7 +8,8 @@
         matInput 
         formControlName="placa" 
         placeholder="Ej: ABC123"
-        maxlength="10">
+        maxlength="10"
+        data-cy="reserva-placa">
       @if (reservaForm.get('placa')?.invalid && reservaForm.get('placa')?.touched) {
         <mat-error>
           @if (reservaForm.get('placa')?.errors?.['required']) {
@@ -25,7 +26,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Seleccionar Celda</mat-label>
-      <mat-select formControlName="idCelda">
+      <mat-select formControlName="idCelda" data-cy="reserva-celda">
         @if (loadingCeldas) {
           <mat-option disabled>Cargando celdas...</mat-option>
         } @else {
@@ -68,7 +69,8 @@
         mat-raised-button 
         color="primary" 
         type="submit"
-        [disabled]="reservaForm.invalid || loading || celdas.length === 0">
+        [disabled]="reservaForm.invalid || loading || celdas.length === 0"
+        data-cy="reserva-submit">
         @if (loading) {
           Creando...
         } @else {

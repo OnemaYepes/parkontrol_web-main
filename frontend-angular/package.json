@@ -9,7 +9,9 @@
     "test": "ng test",
     "sonar": "sonar-scanner",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
-    "test:e2e": "cucumber-js"
+    "test:e2e": "cucumber-js",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "prettier": {
     "printWidth": 100,
@@ -46,6 +48,7 @@
     "@cucumber/cucumber": "^12.8.2",
     "@types/jasmine": "~5.1.0",
     "chromedriver": "^147.0.4",
+    "cypress": "^14.4.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

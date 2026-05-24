@@ -30,7 +30,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>ID Metodo de Pago</mat-label>
-      <input matInput type="number" formControlName="idMetodoPago" placeholder="Ingrese el ID del metodo de pago">
+      <input matInput type="number" formControlName="idMetodoPago" placeholder="Ingrese el ID del metodo de pago" data-cy="pago-metodo">
       @if (pagoForm.get('idMetodoPago')?.invalid && pagoForm.get('idMetodoPago')?.touched) {
         <mat-error>
           Debe ingresar un ID de metodo de pago valido
@@ -52,7 +52,8 @@
         mat-raised-button 
         color="primary" 
         type="submit"
-        [disabled]="pagoForm.invalid || loading">
+        [disabled]="pagoForm.invalid || loading"
+        data-cy="pago-submit">
         @if (loading) {
           <mat-spinner diameter="16"></mat-spinner>
           Procesando...

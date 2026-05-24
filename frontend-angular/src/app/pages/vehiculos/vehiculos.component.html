@@ -141,7 +141,8 @@
             formControlName="idTipoVehiculo" 
             type="number"
             placeholder="Ingrese el ID del tipo de vehículo"
-            min="1">
+            min="1"
+            data-cy="vehiculo-tipo">
           @if (createForm.get('idTipoVehiculo')?.invalid && createForm.get('idTipoVehiculo')?.touched) {
             <mat-error>
               @if (createForm.get('idTipoVehiculo')?.errors?.['required']) {
@@ -159,7 +160,8 @@
             color="primary" 
             type="submit"
             [disabled]="createForm.invalid || loading"
-            class="create-button">
+            class="create-button"
+            data-cy="vehiculo-submit">
             <mat-icon>add</mat-icon>
             Registrar Vehiculo
           </button>

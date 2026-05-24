@@ -29,7 +29,8 @@
                  type="email" 
                  formControlName="correo"
                  placeholder="ejemplo@correo.com"
-                 autocomplete="email">
+                 autocomplete="email"
+                 data-cy="login-correo">
           <mat-icon matSuffix>email</mat-icon>
           @if (loginForm.get('correo')?.hasError('required')) {
             <mat-error>El correo es requerido</mat-error>
@@ -51,7 +52,8 @@
                  type="password" 
                  formControlName="contrasena"
                  placeholder="Ingrese su contraseña"
-                 autocomplete="current-password">
+                 autocomplete="current-password"
+                 data-cy="login-contrasena">
           <mat-icon matSuffix>lock</mat-icon>
           @if (loginForm.get('contrasena')?.hasError('required')) {
             <mat-error>La contraseña es requerida</mat-error>
@@ -66,6 +68,7 @@
                   color="primary" 
                   type="submit"
                   class="boton-completo boton-login"
+                  data-cy="login-submit"
                   [disabled]="loginForm.invalid || loading">
 
             @if (loading) {

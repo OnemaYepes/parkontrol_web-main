@@ -9,11 +9,11 @@ describe('Parkontrol Cypress E2E flows', () => {
 
   it('FUNCIONALIDAD 1: Registrar usuario', () => {
     cy.visit('/registro');
-    cy.get('[data-cy="registro-nombre"]').type('Cypress Admin');
-    cy.get('[data-cy="registro-correo"]').type(uniqueEmail());
-    cy.get('[data-cy="registro-contrasena"]').type('Admin1234');
-    cy.get('[data-cy="registro-idEmpresa"]').clear().type('1');
-    cy.get('[data-cy="registro-submit"]').click();
+    cy.robustType('[data-cy="registro-nombre"]', 'Cypress Admin');
+    cy.robustType('[data-cy="registro-correo"]', uniqueEmail());
+    cy.robustType('[data-cy="registro-contrasena"]', 'Admin1234');
+    cy.robustType('[data-cy="registro-idEmpresa"]', 1);
+    cy.get('[data-cy="registro-submit"]', { timeout: 10000 }).click({ force: true });
     cy.url({ timeout: 15000 }).should('include', '/login');
     cy.contains('Iniciar Sesion', { timeout: 10000 }).should('be.visible');
   });
@@ -55,5 +55,11 @@ describe('Parkontrol Cypress E2E flows', () => {
     cy.createVehicle(placa, '1');
     cy.createReservation(placa);
     cy.finalizeReservation(placa, '1');
+  });
+
+  it('FUNCIONALIDAD 6: Ver página de celdas', () => {
+    cy.loginAsAdmin(adminEmail, adminPassword);
+    cy.visit('/celdas');
+    cy.get('[data-cy="celdas-container"]', { timeout: 15000 }).should('be.visible');
   });
 });

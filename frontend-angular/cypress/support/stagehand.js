@@ -1,27 +1,6 @@
 const { z } = require('zod');
-const aiConfig = require('./ai-config');
 
 const Stagehand = {
-  isAIEnabled() {
-    return aiConfig.isAIEnabled;
-  },
-
-  aiProvider() {
-    return aiConfig.getActiveProvider();
-  },
-
-  ai(prompt) {
-    if (!this.isAIEnabled()) {
-      throw new Error('AI no está habilitado. Configura OPENAI_API_KEY o OLLAMA_HOST en frontend-angular/.env');
-    }
-
-    if (this.aiProvider() === 'Ollama') {
-      return cy.task('ollama', { prompt });
-    }
-
-    throw new Error(`Proveedor AI no soportado: ${this.aiProvider()}`);
-  },
-
   // Robust input filler for Material inputs that may be covered by decorations
   fillInput(selector, value) {
     return cy.get(selector, { timeout: 10000 }).then(($el) => {
@@ -106,6 +85,11 @@ const Stagehand = {
 
   agent({ goal, data }) {
     const objective = goal.toLowerCase();
+    // If OpenAI key is provided in Cypress env, ask the LLM for a plan and execute it.
+    const openaiKey = (typeof Cypress !== 'undefined' && Cypress.env && Cypress.env('OPENAI_API_KEY')) || null;
+    if (openaiKey) {
+      return this.llmAgent({ goal, data });
+    }
 
     if (objective.includes('registrar usuario')) {
       return this.registerUsuario(data);
@@ -128,6 +112,60 @@ const Stagehand = {
     }
 
     throw new Error(`Agent no reconoce el objetivo: ${goal}`);
+  },
+
+  buildPrompt(goal, data) {
+    const instruction = `Eres un asistente que transforma un objetivo de prueba en una lista secuencial de pasos ejecutables por Cypress. Devuelve solo JSON con una clave "steps" que es un arreglo. Cada paso debe ser un objeto con {"action": "visit|fill|click|wait|assert", "selector": "<css>", "value": "<texto opcional>"}. Ejemplo: {steps:[{"action":"visit","selector":"/login"},{"action":"fill","selector":"[data-cy=login-correo]","value":"user@example.com"},{"action":"click","selector":"[data-cy=login-submit]"}]}
+Objetivo:${goal}
+Datos:${JSON.stringify(data || {})}`;
+    return instruction;
+  },
+
+  llmAgent({ goal, data }) {
+    const prompt = this.buildPrompt(goal, data);
+    return cy.task('openai', { prompt }).then((res) => {
+      if (!res) throw new Error('Empty response from OpenAI task');
+      if (res.error) throw new Error(`OpenAI error: ${res.error}`);
+      let content = res.result || '';
+      // try to extract JSON
+      let parsed;
+      try {
+        // sometimes the model wraps JSON in markdown
+        const jsonText = content.replace(/^```json\s*/, '').replace(/```$/g, '').trim();
+        parsed = JSON.parse(jsonText);
+      } catch (e) {
+        throw new Error(`No se pudo parsear JSON de OpenAI: ${e.message}\nResponse:\n${content}`);
+      }
+
+      if (!parsed.steps || !Array.isArray(parsed.steps)) {
+        throw new Error('OpenAI did not return steps array');
+      }
+
+      // execute steps sequentially
+      const performStep = (step) => {
+        const action = (step.action || '').toLowerCase();
+        if (action === 'visit') {
+          return cy.visit(step.selector);
+        }
+        if (action === 'fill') {
+          return this.fillInput(step.selector, step.value);
+        }
+        if (action === 'click') {
+          return cy.get(step.selector, { timeout: 10000 }).click({ force: true });
+        }
+        if (action === 'wait') {
+          const t = parseInt(step.value, 10) || 500;
+          return cy.wait(t);
+        }
+        if (action === 'assert') {
+          return cy.get(step.selector, { timeout: 10000 }).should('be.visible');
+        }
+        // unknown action: ignore
+        return cy.log(`Unknown action from LLM: ${action}`);
+      };
+
+      return parsed.steps.reduce((chain, step) => chain.then(() => performStep(step)), cy.wrap(null));
+    });
   },
 
   registerUsuario({ nombre, correo, contrasena, idEmpresa }) {

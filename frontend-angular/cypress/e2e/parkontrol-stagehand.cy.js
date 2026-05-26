@@ -88,15 +88,4 @@ describe('Parkontrol Stagehand flows para IA + funcionalidades', () => {
     });
   });
 
-  it('Prueba de Ollama local si está configurado', () => {
-    if (!Stagehand.isAIEnabled() || Stagehand.aiProvider() !== 'Ollama') {
-      cy.log('Ollama no configurado en frontend-angular/.env');
-      return;
-    }
-
-    Stagehand.ai('Escribe un saludo breve en español.').then((respuesta) => {
-      expect(respuesta).to.be.a('string');
-      expect(respuesta.length).to.be.greaterThan(0);
-    });
-  });
 });

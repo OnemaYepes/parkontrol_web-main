@@ -32,21 +32,10 @@ Este proyecto usa un helper local de Stagehand. No existe un CLI `npx stagehand@
 Para habilitar la configuración de IA local:
 
 1. Copia `frontend-angular/.env.example` a `frontend-angular/.env`
-2. Llena `OLLAMA_HOST` con la URL de tu servidor Ollama local, por ejemplo `http://localhost:11434`
-3. Opcionalmente define `GEMINI_MODEL` con el modelo que quieras usar en Ollama
-4. Ejecuta `npm install` en `frontend-angular` para instalar `dotenv`
+2. Define cualquier variable necesaria para tu proveedor de IA si la usas.
+3. Ejecuta `npm install` en `frontend-angular` para instalar `dotenv`
 
 La configuración se carga automáticamente desde `frontend-angular/cypress/support/ai-config.js`.
-
-## Ollama en Cypress
-
-Se expone un task Cypress que llama al servidor Ollama local:
-- `cy.task('ollama', { prompt })`
-
-Y en Stagehand está disponible el método:
-- `Stagehand.ai(prompt)`
-
-Esto permite usar Ollama dentro de los tests sin depender de un paquete externo adicional.
 
 ## Qué hace cada parte
 

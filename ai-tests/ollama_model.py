@@ -5,7 +5,9 @@ from langchain_ollama import ChatOllama
 class OllamaModel(DeepEvalBaseLLM):
 
     def __init__(self, model="llama3.2:3b"):
-        self.model = ChatOllama(model=model)
+        # Al agregar format="json", LangChain le exige a Ollama que 
+        # restrinja los tokens de salida a una estructura JSON válida.
+        self.model = ChatOllama(model=model, format="json")
 
     def load_model(self):
         return self.model

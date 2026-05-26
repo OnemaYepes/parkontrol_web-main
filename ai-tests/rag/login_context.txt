@@ -1,0 +1,17 @@
+# Contexto RAG para el escenario de login
+
+Sistema bajo prueba:
+http://http://localhost:4200/login
+
+Credenciales válidas:
+- correo: juan@gmail.com
+- Contraseña: Prueba123456
+
+Criterio de éxito:
+El login se considera exitoso si se redirige a http://localhost:4200/dashboard
+
+Criterio de fallo:
+El login se considera fallido si la página muestra mensajes relacionados con usuario inválido, contraseña inválida o acceso denegado.
+
+Uso del contexto:
+Este archivo simula una pequeña base de conocimiento RAG que el agente o chatbot puede consultar para responder si la acción ejecutada en la página fue correcta.

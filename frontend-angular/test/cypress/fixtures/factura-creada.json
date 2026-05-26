@@ -1,0 +1,8 @@
+{
+  "id": 501,
+  "idPago": 9001,
+  "idClienteFactura": 1,
+  "cufe": "CUFE-NEW-001",
+  "enviada": false,
+  "fechaEmision": "2026-05-05T12:05:00.000Z"
+}

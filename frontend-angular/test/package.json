@@ -1,0 +1,43 @@
+{
+  "name": "parkontrol-e2e-tests",
+  "version": "1.0.0",
+  "description": "E2E Tests para Parkontrol usando Cypress",
+  "type": "module",
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:ui": "cypress run --spec 'cypress/e2e/ui/**/*.cy.js'",
+    "test:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.js'",
+    "test:security": "cypress run --spec 'cypress/e2e/security/**/*.cy.js'",
+    "test:a11y": "cypress run --spec 'cypress/e2e/accessibility/**/*.cy.js'",
+    "test:regression": "cypress run --spec 'cypress/e2e/regression/**/*.cy.js'",
+    "test:all": "cypress run",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:headless": "cypress run --headless",
+    "test:record": "cypress run --record",
+    "test:debug": "cypress run --headed --no-exit"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "testing",
+    "parkontrol",
+    "ui",
+    "api",
+    "security",
+    "accessibility",
+    "regression"
+  ],
+  "author": "Parkontrol QA Team",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "^2.5.8",
+    "@google/generative-ai": "^0.24.1",
+    "openai": "^6.39.0",
+    "playwright": "^1.60.0"
+  }
+}

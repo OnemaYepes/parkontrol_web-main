@@ -3,3 +3,9 @@
 .vscode
 
 /coverage
+
+.github
+
+.gitignore
+
+/frontend-angular/test/cypress/screenshots/

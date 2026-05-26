@@ -1,0 +1,19 @@
+[
+  {
+    "id": 101,
+    "idCelda": 1,
+    "idVehiculo": 1,
+    "fechaEntrada": "2026-05-05T10:00:00.000Z",
+    "estado": "ABIERTA",
+    "vehiculo": { "id": 1, "placa": "ABC123" }
+  },
+  {
+    "id": 102,
+    "idCelda": 2,
+    "idVehiculo": 2,
+    "fechaEntrada": "2026-05-05T09:00:00.000Z",
+    "fechaSalida": "2026-05-05T11:00:00.000Z",
+    "estado": "CERRADA",
+    "vehiculo": { "id": 2, "placa": "XYZ987" }
+  }
+]

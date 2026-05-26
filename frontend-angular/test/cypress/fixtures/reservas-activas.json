@@ -1,0 +1,10 @@
+[
+  {
+    "id": 201,
+    "idCelda": 1,
+    "idVehiculo": 1,
+    "fechaEntrada": "2026-05-05T10:00:00.000Z",
+    "estado": "ABIERTA",
+    "vehiculo": { "id": 1, "placa": "ABC123" }
+  }
+]

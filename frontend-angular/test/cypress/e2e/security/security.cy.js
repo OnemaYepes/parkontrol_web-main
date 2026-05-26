@@ -1,0 +1,57 @@
+const adminUser = {
+  id: 1,
+  correo: 'admin@demo.com',
+  nombreRol: 'ADMINISTRADOR',
+  idEmpresa: 10
+};
+
+const operadorUser = {
+  id: 2,
+  correo: 'operador@demo.com',
+  nombreRol: 'OPERADOR',
+  idEmpresa: 10
+};
+
+describe('Security basico (E2E)', () => {
+  it('login almacena token en localStorage', () => {
+    cy.stubLogin(adminUser);
+
+    cy.intercept('GET', '**/companies/*', { fixture: 'empresa.json' });
+    cy.intercept('GET', '**/views/ocupacion*', { fixture: 'ocupacion.json' });
+    cy.intercept('GET', '**/reservations/activas', { fixture: 'reservas-activas.json' });
+    cy.intercept('GET', '**/views/ingresos*', { fixture: 'ingresos.json' });
+    cy.intercept('GET', '**/views/facturacion*', { fixture: 'facturacion.json' });
+
+    cy.visit('/login');
+    cy.get('[data-cy=login-email]').type('admin@demo.com', { force: true });
+    cy.get('[data-cy=login-password]').type('password123', { force: true });
+    cy.get('[data-cy=login-submit]').click();
+
+    cy.wait('@login');
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('auth_token')).to.not.equal(null);
+    });
+  });
+
+  it('crear celda requiere autenticacion', () => {
+    cy.visit('/celdas');
+    cy.url().should('include', '/login');
+  });
+
+  it('finalizar reserva requiere autenticacion', () => {
+    cy.visit('/reservas');
+    cy.url().should('include', '/login');
+  });
+
+  it('ocupacion por parqueadero restringe rol operador', () => {
+    cy.on('window:alert', () => {});
+    cy.visitWithAuth('/vistas', operadorUser);
+    cy.url().should('include', '/login');
+  });
+
+  it('facturacion restringe rol operador', () => {
+    cy.on('window:alert', () => {});
+    cy.visitWithAuth('/facturacion', operadorUser);
+    cy.url().should('include', '/login');
+  });
+});

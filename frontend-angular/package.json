@@ -33,8 +33,10 @@
     "@angular/material": "^20.2.11",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "@browserbasehq/stagehand": "^3.4.0",
     "dayjs": "^1.11.19",
     "jwt-decode": "^4.0.0",
+    "playwright": "^1.60.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -46,6 +48,7 @@
     "@cucumber/cucumber": "^12.8.2",
     "@types/jasmine": "~5.1.0",
     "chromedriver": "^147.0.4",
+    "cypress": "^15.15.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
